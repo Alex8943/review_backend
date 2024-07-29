@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "review-backend"
+version = "0.1.0"
+description = ""
+authors = ["Alex8943 <65241585+Alex8943@users.noreply.github.com>"]
+readme = "README.md"
+packages = [{include = "review_backend"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.111.1"
+uvicorn = "^0.30.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
