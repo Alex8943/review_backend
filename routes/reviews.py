@@ -8,9 +8,6 @@ db_conn = get_db_conn()
 collection = db_conn.reviews
 router = APIRouter()
 
-@router.get("/test")
-async def test():
-    return {"message": "Hello World"}
 
 @router.post("/review", response_model=Dict[str, str])
 async def create_review(review: Review) -> Dict[str, str]:
@@ -23,9 +20,9 @@ async def create_review(review: Review) -> Dict[str, str]:
 
 @router.get("/reviews", response_model=List[Review])
 async def get_reviews() -> List[Review]:
-   
+    
     reviews = list(collection.find())
     for review in reviews:
         review["id"] = str(review["_id"])
         del review["_id"]
-    return reviews 
+    return reviews

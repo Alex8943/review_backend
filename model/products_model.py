@@ -3,7 +3,7 @@ from typing import Optional
 from bson import ObjectId
 
 class Product(BaseModel):
-    id: Optional[str] = Fields(None, alias="_id")
+    id: Optional[str] = Field(None, alias="id")
     name: str
 
     class Config:
