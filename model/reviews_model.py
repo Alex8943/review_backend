@@ -5,7 +5,7 @@ from bson import ObjectId
 
 class Review(BaseModel):
     id: Optional[str] = Field(None, alias="id")
-    title: str
+    title: str #product_id
     description: str
 
 

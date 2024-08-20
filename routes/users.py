@@ -24,6 +24,7 @@ async def get_users() -> List[User]:
         del user["_id"]
     return users
 
+
 #Delete a user with id
 #How to delete a user, with an id that is null??
 @router.delete("/user/{id}", response_model=Dict[str, str])
