@@ -1,3 +1,4 @@
+import bcrypt
 from typing import List, Dict
 from bson.objectid import ObjectId
 from db_services.connection import get_db_conn
@@ -8,10 +9,16 @@ db_conn = get_db_conn()
 collection = db_conn.users
 router = APIRouter()
 
-# Create a user
+# Create a user with hashed password
 @router.post("/user", response_model=Dict[str, str])
 async def create_user(user: User) -> Dict[str, str]:
+    # Hash the user's password
+    hashed_password = bcrypt.hashpw(user.password.encode('utf-8'), bcrypt.gensalt())
+    
+    # plain text delete, hashed password saved
     user_dict = user.dict(by_alias=True)
+    user_dict['password'] = hashed_password.decode('utf-8')  # Store as a string
+    
     result = collection.insert_one(user_dict)
     return {'id': str(result.inserted_id)}
 
@@ -24,9 +31,7 @@ async def get_users() -> List[User]:
         del user["_id"]
     return users
 
-
-#Delete a user with id
-#How to delete a user, with an id that is null??
+# Delete a user with id
 @router.delete("/user/{id}", response_model=Dict[str, str])
 async def delete_user(id: str) -> Dict[str, str]:
     result = collection.delete_one({"_id": ObjectId(id)})
