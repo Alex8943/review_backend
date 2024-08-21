@@ -1,4 +1,6 @@
 # review_backend
 
 This project, is my backend setup with a database. 
-Frontend part will be worked on later. 
+You can see my frontend here: 
+
+https://github.com/Alex8943/review_frontend 
