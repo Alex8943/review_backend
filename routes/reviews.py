@@ -26,3 +26,13 @@ async def get_reviews() -> List[Review]:
         review["id"] = str(review["_id"])
         del review["_id"]
     return reviews
+
+
+#Get a review by "title"
+@router.get("/review/{title}", response_model=Review)
+async def get_review(title: str) -> Review:
+    
+    review = collection.find_one({"title": title})
+    review["id"] = str(review["_id"])
+    del review["_id"]
+    return review
